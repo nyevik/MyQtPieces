@@ -2,9 +2,8 @@
 #define DASHBOARDWINDOW_H
 
 #include <QMainWindow>
-#include <QStandardItemModel>
-#include <QStringList>
-#include <QList>
+#include <QSqlDatabase>
+#include <QSqlQueryModel>
 
 namespace Ui {
 class DashboardWindow;
@@ -15,7 +14,7 @@ class DashboardWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit DashboardWindow(QWidget *parent = nullptr);
+    explicit DashboardWindow(const QSqlDatabase &database, QWidget *parent = nullptr);
     ~DashboardWindow();
 
 private slots:
@@ -26,12 +25,11 @@ private slots:
     void on_actionAbout_triggered();
 
 private:
-    void setPlaceholderModel(const QString &title,
-                             const QStringList &columns,
-                             const QList<QStringList> &rows);
+    void setQueryModel(const QString &title, const QString &queryText);
 
     Ui::DashboardWindow *ui;
-    QStandardItemModel *model;
+    QSqlDatabase db;
+    QSqlQueryModel *model;
 };
 
 #endif // DASHBOARDWINDOW_H

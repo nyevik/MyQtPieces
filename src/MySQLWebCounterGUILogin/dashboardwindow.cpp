@@ -4,12 +4,13 @@
 #include <QAbstractItemView>
 #include <QHeaderView>
 #include <QMessageBox>
-#include <QStandardItem>
+#include <QSqlError>
 
-DashboardWindow::DashboardWindow(QWidget *parent)
+DashboardWindow::DashboardWindow(const QSqlDatabase &database, QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::DashboardWindow),
-      model(new QStandardItemModel(this))
+      db(database),
+      model(new QSqlQueryModel(this))
 {
     ui->setupUi(this);
 
@@ -17,6 +18,7 @@ DashboardWindow::DashboardWindow(QWidget *parent)
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView->horizontalHeader()->setStretchLastSection(true);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->browseButton, &QPushButton::clicked, this, &DashboardWindow::showBrowseView);
     connect(ui->structureButton, &QPushButton::clicked, this, &DashboardWindow::showStructureView);
@@ -30,20 +32,19 @@ DashboardWindow::~DashboardWindow()
     delete ui;
 }
 
-void DashboardWindow::setPlaceholderModel(const QString &title,
-                                          const QStringList &columns,
-                                          const QList<QStringList> &rows)
+void DashboardWindow::setQueryModel(const QString &title, const QString &queryText)
 {
-    model->clear();
-    model->setHorizontalHeaderLabels(columns);
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Database connection is not open.");
+        statusBar()->showMessage("Database connection is not open.");
+        return;
+    }
 
-    for (const auto &row : rows) {
-        QList<QStandardItem *> items;
-        items.reserve(row.size());
-        for (const auto &cell : row) {
-            items.append(new QStandardItem(cell));
-        }
-        model->appendRow(items);
+    model->setQuery(queryText, db);
+    if (model->lastError().isValid()) {
+        QMessageBox::critical(this, "Query Error", model->lastError().text());
+        statusBar()->showMessage("Query failed.");
+        return;
     }
 
     statusBar()->showMessage(title);
@@ -51,38 +52,23 @@ void DashboardWindow::setPlaceholderModel(const QString &title,
 
 void DashboardWindow::showBrowseView()
 {
-    setPlaceholderModel(
-        "Browse view (placeholder)",
-        {"Table", "Rows", "Updated"},
-        {
-            {"users", "3", "today"},
-            {"visits", "128", "today"},
-            {"events", "12", "today"}
-        });
+    setQueryModel(
+        "Browse: pages",
+        "SELECT id, name, total_views FROM pages ORDER BY total_views DESC");
 }
 
 void DashboardWindow::showStructureView()
 {
-    setPlaceholderModel(
-        "Structure view (placeholder)",
-        {"Column", "Type", "Nullable"},
-        {
-            {"id", "INT", "no"},
-            {"username", "VARCHAR(255)", "no"},
-            {"created_at", "DATETIME", "yes"}
-        });
+    setQueryModel(
+        "Structure: pages",
+        "SHOW COLUMNS FROM pages");
 }
 
 void DashboardWindow::showTablesView()
 {
-    setPlaceholderModel(
-        "Tables view (placeholder)",
-        {"Schema", "Table", "Engine"},
-        {
-            {"public", "users", "InnoDB"},
-            {"public", "visits", "InnoDB"},
-            {"public", "events", "InnoDB"}
-        });
+    setQueryModel(
+        "Tables",
+        "SHOW TABLES");
 }
 
 void DashboardWindow::on_actionExit_triggered()

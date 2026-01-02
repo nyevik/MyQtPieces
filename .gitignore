@@ -1,0 +1,69 @@
+
+# -------------------------------
+# Qt / C++ build artifacts
+# -------------------------------
+
+# Generic build directories (qmake / CMake / IDEs)
+build/
+build-*/
+cmake-build-*/
+out/
+
+# qmake / Qt Creator generated files
+Makefile
+Makefile.*
+*.pro.user
+*.pro.user.*
+*.qmake.stash
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# Object files and libraries
+*.o
+*.obj
+*.lo
+*.la
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exp
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug / profile info
+*.d
+*.pdb
+*.idb
+*.ilk
+*.map
+*.gcno
+*.gcda
+*.profraw
+*.profdata
+
+# IDE / editor metadata
+.idea/
+*.user
+*.user.*
+*.autosave
+
+# OS cruft
+.DS_Store
+Thumbs.db
+.directory
+

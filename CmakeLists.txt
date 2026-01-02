@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.21)
+
+project(QtHelloMultiIDE LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTORCC ON)
+
+# Find Qt 6 needed
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Gui)
+find_package(Qt6 REQUIRED COMPONENTS Sql)
+
+# Some nice default settings from Qt 6 CMake API
+qt_standard_project_setup()
+
+qt_add_executable(mysql-webcounter-gui-login
+    src/MySQLWebCounterGUILogin/main.cpp
+    src/MySQLWebCounterGUILogin/mainwindow.cpp
+    src/MySQLWebCounterGUILogin/mainwindow.h
+    src/MySQLWebCounterGUILogin/mainwindow.ui
+    src/MySQLWebCounterGUILogin/dashboardwindow.cpp
+    src/MySQLWebCounterGUILogin/dashboardwindow.h
+    src/MySQLWebCounterGUILogin/dashboardwindow.ui
+    #Resources
+    src/MySQLWebCounterGUILogin/resource.qrc
+
+)
+
+target_link_libraries(mysql-webcounter-gui-login PRIVATE Qt6::Widgets)
+target_link_libraries(mysql-webcounter-gui-login PRIVATE Qt6::Core)
+target_link_libraries(mysql-webcounter-gui-login PRIVATE Qt6::Gui)
+target_link_libraries(mysql-webcounter-gui-login PRIVATE Qt6::Sql)

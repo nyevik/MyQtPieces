@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "debug-qtcreator-gcc15",
+      "displayName": "Debug (Qt Creator, GCC 15.2)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-qtcreator-gcc15-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "/mnt/raid1/Qt/6.11.0/gcc_64",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_C_COMPILER": "/mnt/raid1/gcc-15.2.0/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/mnt/raid1/gcc-15.2.0/bin/g++"
+      }
+    },
+    {
+      "name": "debug-vscode-gcc15",
+      "displayName": "Debug (VS Code, GCC 15.2)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-vscode-gcc15-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "/mnt/raid1/Qt/6.11.0/gcc_64",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_C_COMPILER": "/mnt/raid1/gcc-15.2.0/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/mnt/raid1/gcc-15.2.0/bin/g++"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-debug-qtcreator-gcc15",
+      "configurePreset": "debug-qtcreator-gcc15"
+    },
+    {
+      "name": "build-debug-vscode-gcc15",
+      "configurePreset": "debug-vscode-gcc15"
+    }
+  ]
+}

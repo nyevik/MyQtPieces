@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+  "settings": {
+    "qttools.designerPath": "/mnt/raid1/Qt/6.11.0/gcc_64/bin/designer"
+  }
+}
+

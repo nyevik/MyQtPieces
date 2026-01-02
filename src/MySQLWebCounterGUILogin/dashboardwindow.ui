@@ -29,23 +29,44 @@
        </property>
        <layout class="QVBoxLayout" name="leftLayout">
         <item>
-         <widget class="QPushButton" name="browseButton">
+         <widget class="QPushButton" name="pagesButton">
           <property name="text">
-           <string>Browse</string>
+           <string>Pages</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="structureButton">
+         <widget class="QPushButton" name="pageViewsButton">
           <property name="text">
-           <string>Structure</string>
+           <string>Page Views</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pageViewsTotalsButton">
+          <property name="text">
+           <string>Page Views + Totals</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="tablesButton">
           <property name="text">
-           <string>Tables</string>
+           <string>Show Tables</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="describePagesButton">
+          <property name="text">
+           <string>Describe pages</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="describePageViewsButton">
+          <property name="text">
+           <string>Describe page_views</string>
           </property>
          </widget>
         </item>

@@ -1,5 +1,7 @@
 /** 
- * @author Nik 
+ * @author Nikolay Yevik
+ * @brief Entry point for the MySQL Web Counter GUI Login application.
+ * @file main.cpp
  */
 
 

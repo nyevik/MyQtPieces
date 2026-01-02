@@ -1,3 +1,9 @@
+/**
+ * @author Nikolay Yevik
+ * @file mainwindow.cpp
+ * @brief Implementation of the MainWindow class for the MySQL Web Counter GUI Login application.
+ */	
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

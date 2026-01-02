@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.4.7, for Linux (x86_64)
 --
--- Host: localhost    Database: web_visitor_counter
+-- Host: localhost    Database: website_visitor_counter
 -- ------------------------------------------------------
 -- Server version	8.4.7
 
@@ -19,11 +19,11 @@
 -- Current Database: `website_visitor_counter`
 --
 
-/*!40000 DROP DATABASE IF EXISTS `web_visitor_counter`*/;
+/*!40000 DROP DATABASE IF EXISTS `website_visitor_counter`*/;
 
-CREATE DATABASE IF NOT EXISTS `web_visitor_counter` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `website_visitor_counter` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `web_visitor_counter`;
+USE `website_visitor_counter`;
 
 --
 -- Table structure for table `page_views`

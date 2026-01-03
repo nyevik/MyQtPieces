@@ -13,6 +13,9 @@
 #include <QProcess>
 #include <QScreen>
 #include <QSharedPointer>
+#include <QSqlQueryModel>
+#include <QSqlTableModel>
+#include <QSqlQuery>
 #include <QSqlError>
 #include <QThread>
 #include <QVBoxLayout>
@@ -43,6 +46,7 @@ DashboardWindow::DashboardWindow(const QSqlDatabase &database, QWidget *parent)
     connect(ui->describePagesButton, &QPushButton::clicked, this, &DashboardWindow::showPagesStructure);
     connect(ui->describePageViewsButton, &QPushButton::clicked, this, &DashboardWindow::showPageViewsStructure);
     connect(ui->pageViewsTotalsButton, &QPushButton::clicked, this, &DashboardWindow::showPageViewsTotals);
+    connect(ui->resetViewsButton, &QPushButton::clicked, this, &DashboardWindow::resetPageViewsTable);
 
     showPagesTable();
 }
@@ -129,6 +133,48 @@ void DashboardWindow::showPageViewsTotals()
         "FROM page_views pv "
         "JOIN pages p ON p.id = pv.page_id "
         "ORDER BY pv.tstamp DESC");
+}
+
+/**
+ * @brief Resets the page_views table by deleting all records, 
+ * resetting the auto-increment value, and updating the total_views in the pages table. 
+ * 
+ * @details This function performs the following steps:
+ * 1. Deletes all records from the page_views table.
+ * 2. Resets the auto-increment value of the page_views table to 1.
+ * 3. Updates the total_views column in the pages table to 0.
+ * @pre The database connection must be open.
+ * @post The page_views table is empty, its auto-increment value is reset, and the total_views in the pages table is set to 0 for each page.
+ */
+void DashboardWindow::resetPageViewsTable()
+{
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Database connection is not open.");
+        statusBar()->showMessage("Database connection is not open.");
+        return;
+    }
+
+    QSqlQuery query(db);
+    if (!query.exec("DELETE FROM page_views")) {
+        QMessageBox::critical(this, "Query Error", query.lastError().text());
+        statusBar()->showMessage("Failed to reset page_views table.");
+        return;
+    }
+
+    if (!query.exec("ALTER TABLE page_views AUTO_INCREMENT = 1")) {
+        QMessageBox::critical(this, "Query Error", query.lastError().text());
+        statusBar()->showMessage("Failed to reset page_views table auto-increment.");
+        return;
+    }
+
+    if (!query.exec("UPDATE pages SET total_views = 0")) {
+        QMessageBox::critical(this, "Query Error", query.lastError().text());
+        statusBar()->showMessage("Failed to reset total_views in pages table.");
+        return;
+    }
+
+    statusBar()->showMessage("Page Views table has been reset.");
+    showPageViewsTable();
 }
 
 void DashboardWindow::showTableContextMenu(const QPoint &position)

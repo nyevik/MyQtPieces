@@ -27,6 +27,7 @@ private slots:
     void showPagesStructure();
     void showPageViewsStructure();
     void showPageViewsTotals();
+    void resetPageViewsTable(); /** Resets the page_views table by deleting all rows and setting the auto-increment number to 1, also resets the total_views column in the pages table to 0 for all pages */
     void showTableContextMenu(const QPoint &position);
     void onDigFinished(const QString &ip, const QString &output, const QString &error);
     void on_actionExit_triggered();

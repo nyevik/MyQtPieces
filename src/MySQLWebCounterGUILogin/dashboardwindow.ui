@@ -86,6 +86,7 @@
         </item>
         <item>
          <widget class="QPushButton" name="resetViewsButton">
+<<<<<<< HEAD
           <property name="mouseTracking">
            <bool>true</bool>
           </property>
@@ -103,6 +104,10 @@
           </property>
           <property name="autoFillBackground">
            <bool>true</bool>
+=======
+          <property name="toolTipDuration">
+           <number>3000</number>
+>>>>>>> 7e083a2 (Add job configuration for VS Code build preset and set tooltip duration for reset button)
           </property>
           <property name="text">
            <string>*!Reset Views!*</string>

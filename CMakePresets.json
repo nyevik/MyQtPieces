@@ -35,7 +35,8 @@
     },
     {
       "name": "build-debug-vscode-gcc15",
-      "configurePreset": "debug-vscode-gcc15"
+      "configurePreset": "debug-vscode-gcc15",
+      "jobs":16
     }
   ]
 }

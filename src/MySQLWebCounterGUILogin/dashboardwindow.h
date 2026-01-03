@@ -6,11 +6,16 @@
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
+#include <QStandardItemModel>
 #include <QString>
+#include <QStringList>
+#include <QVector>
 
 namespace Ui {
 class DashboardWindow;
 }
+
+class QThread;
 
 class DashboardWindow : public QMainWindow
 {
@@ -23,6 +28,8 @@ public:
 private slots:
     void showPagesTable();
     void showPageViewsTable();
+    void sortPageViewsById();
+    void sortPageViewsByName();
     void showTablesList();
     void showPagesStructure();
     void showPageViewsStructure();
@@ -36,12 +43,20 @@ private slots:
 private:
     void setTableModel(const QString &title, const QString &tableName);
     void setQueryModel(const QString &title, const QString &queryText);
+    void runPageViewsSort(const QString &orderByColumn, const QString &title);
+    void applySortedResults(const QString &title,
+                            const QStringList &headers,
+                            const QVector<QStringList> &rows);
+    void scheduleResizeToContents();
+    void resizeToContents();
     void startDigLookup(const QString &ip);
 
     Ui::DashboardWindow *ui;
     QSqlDatabase db;
     QSqlTableModel *tableModel;
     QSqlQueryModel *queryModel;
+    QStandardItemModel *sortedModel;
+    QThread *sortThread;
 };
 
 #endif // DASHBOARDWINDOW_H

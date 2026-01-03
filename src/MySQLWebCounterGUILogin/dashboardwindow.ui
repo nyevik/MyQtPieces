@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Database Console</string>
+   <string>Web Counter Database Console</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -39,6 +39,20 @@
          <widget class="QPushButton" name="pageViewsButton">
           <property name="text">
            <string>Page Views</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sortPageIdButton">
+          <property name="text">
+           <string>Sort Views by Page ID</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sortPageNameButton">
+          <property name="text">
+           <string>Sort Views by Page Name</string>
           </property>
          </widget>
         </item>
@@ -72,8 +86,29 @@
         </item>
         <item>
          <widget class="QPushButton" name="resetViewsButton">
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
+          <property name="tabletTracking">
+           <bool>true</bool>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::ContextMenuPolicy::ActionsContextMenu</enum>
+          </property>
+          <property name="toolTip">
+           <string extracomment="Will reset Views, Total views, autoincrement!">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;WIll reset views!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
           <property name="text">
-           <string>Reset Page Views Table</string>
+           <string>*!Reset Views!*</string>
+          </property>
+          <property name="icon">
+           <iconset theme="dialog-warning"/>
           </property>
          </widget>
         </item>

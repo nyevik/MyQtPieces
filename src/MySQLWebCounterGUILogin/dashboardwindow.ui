@@ -99,7 +99,7 @@
            <string extracomment="Will reset Views, Total views, autoincrement!">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;WIll reset views!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="toolTipDuration">
-           <number>3</number>
+           <number>3000</number>
           </property>
           <property name="autoFillBackground">
            <bool>true</bool>
